@@ -1,7 +1,6 @@
 package edu.handong.analysis;
 
-import edu.handong.analysis.datamodel.Course;
-import edu.handong.analysis.datamodel.Student;
+import edu.handong.analysis.datamodel.*;
 
 public class HGUCoursePatternAnalyzer {
 	
@@ -56,22 +55,38 @@ public class HGUCoursePatternAnalyzer {
 	private Student[] initiateStudentArrayFromLines(String[] lines) {
 		
 		// TODO: implement this method
+		int i, j = 0;
+		String names;
+		Student studentnames;
+		students = new Student[numOfStudents];
+	
+		for(i = 0; i < lines.length; i++) {
+			names = lines[i].trim().split(", ")[1]; 
+			studentnames = new Student(names);
+			if(studentExist(students, studentnames)) {
+				if(j < numOfStudents) {
+					students[j] = studentnames;
+					j++;
+				}
+			}
+		}
 		
-		
-		return null;
+		return students;
 	}
 
 	/**
-	 * This method check if there is the same name of the second arugement in the array, students
+	 * This method check if there is the same name of the second argument in the array, students
 	 * @param students
 	 * @param student
 	 * @return boolean
 	 */
 	private boolean studentExist(Student[] students, Student student) {
-		
-		// TODO: implement this method
-
-		return false;
+		// TODO: implement this method	
+		for(int i = 0; students[i] != null; i++) {
+			if((students[i].getName()).equals(student.getName())) {
+				return false; 
+			}
+		}return true;
 	}
 	
 	/**
@@ -82,8 +97,24 @@ public class HGUCoursePatternAnalyzer {
 	private Course[] initiateCourseArrayFromLines(String[] lines) {
 		
 		// TODO: implement this method
+		int i, j = 0;
+		String names;
+		Course coursenames;
+		courses = new Course[numOfCourses];
+	
+		for(i = 0; i < lines.length; i++) {
+			names = lines[i].trim().split(", ")[2]; 
+			coursenames = new Course(names);
+			if(courseExist(courses, coursenames)) {
+				if(j < numOfCourses) {
+					courses[j] = coursenames;
+					j++;
+				}
+			}
+		}
 		
-		return null;
+		return courses;
+		
 	}
 
 	/**
@@ -95,8 +126,10 @@ public class HGUCoursePatternAnalyzer {
 	private boolean courseExist(Course[] courses, Course course) {
 		
 		// TODO: implement this method
-
-		return false;
+		for(int i = 0; courses[i] != null; i++) {
+			if((courses[i].getCourseName()).equals(course.getCourseName())) {
+				return false; 
+			}
+		}return true;
 	}
-
 }
